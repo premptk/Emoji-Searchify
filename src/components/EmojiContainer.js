@@ -1,7 +1,15 @@
 import React, { Component } from "react";
-import NewsItem from "./NewsItem";
+import EmojiItem from "./EmojiItem";
+import PropTypes from'prop-types';
 
-export class News extends Component {
+export class EmojiContainer extends Component {
+  static defaultProps = {
+    category: ''
+  }
+
+  static propTypes = {
+    category: PropTypes.string
+  }
 
   constructor(){
     super();
@@ -13,7 +21,7 @@ export class News extends Component {
 
   async componentDidMount(){
     console.log("cdm")
-    let url = "https://emojihub.yurace.pro/api/all"
+    let url = `https://emojihub.yurace.pro/api/all${this.props.category}`
     let data = await fetch(url);
     let parsedData = await data.json()
     this.setState({articles: parsedData})
@@ -23,12 +31,13 @@ export class News extends Component {
     return (
       <div className="container my-3">
         <div className="container my-4">
-          <u><h2>EmojiYourself - Search and find your emotions</h2></u>
+          <u><h2  style={{ margin: '25px 0px', marginTop: '90px' }}>EmojiYourself</h2></u>
+          <h6> Search and find your emotions</h6>
         </div>
         <div className="row">
           {this.state.articles.map((element)=>{
             return <div className="col-md-4" key={element.htmlCode}>
-              <NewsItem name={element.name} category={element.category} group={element.group} htmlCode={element.htmlCode} unicode={element.unicode}/>
+              <EmojiItem name={element.name} category={element.category} group={element.group} htmlCode={element.htmlCode} unicode={element.unicode}/>
             </div>
           })}
         </div>
@@ -37,4 +46,4 @@ export class News extends Component {
   }
 }
 
-export default News;
+export default EmojiContainer;

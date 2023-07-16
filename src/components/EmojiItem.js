@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { EmojiConverter } from "./EmojiConverter";
 
-export class NewsItem extends Component {
+export class EmojiItem extends Component {
   render() {
     let {name, category, group, htmlCode, unicode} = this.props;
     return (
@@ -21,4 +21,4 @@ export class NewsItem extends Component {
   }
 }
 
-export default NewsItem;
+export default EmojiItem;
